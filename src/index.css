@@ -24,3 +24,18 @@ h1{
     color:black;
     font-size: 40pt;
 }
+
+
+#gameDiv
+#ownCardDiv {
+    display: float;
+    width: 50%;
+
+    background-color: lightblue;
+}
+
+#oppCardDiv{
+    display: float;
+    width: 50%;
+    background-color: rgb(176, 117, 117);
+}

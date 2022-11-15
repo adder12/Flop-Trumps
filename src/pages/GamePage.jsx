@@ -7,19 +7,35 @@ function GamePage() {
       <div>
         <h2>Lets play a game</h2>
         <div id="gameDiv">
-          <div id="ownCardDiv">     <OwnCardStructure />
-          <ApiCall id="23" /></div>
-          <div id="oppCardDiv"></div>
-
-     
+          <div id="ownCardDiv">
+            {" "}
+            <OwnCardStructure />
+            <GenerateOwnCard /></div>
+            <div id="oppCardDiv">
+            <OppCardStructure/>
+            <GenerateOppCard/>
+          </div>
         </div>
       </div>
     </>
   );
 }
+
 export default GamePage;
 
-function ApiCall(props) {
+
+function GenerateOwnCard() {
+  let maxNumber = 0;
+  fetch(`http://localhost:8080/home/filmCount`)
+    .then((res) => res.text())
+    .then((data) => {
+      maxNumber = data;
+     let randomId = Math.random();
+  randomId = randomId * maxNumber;
+  randomId++;
+  randomId = Math.floor(randomId);
+  console.log(randomId);
+  
   let filmId = document.getElementById("filmId");
   let title = document.getElementById("title");
   let description = document.getElementById("description");
@@ -30,7 +46,8 @@ function ApiCall(props) {
   let rate = document.getElementById("rate");
   let cost = document.getElementById("cost");
 
-  let id = props.id;
+  let id = randomId;
+  
   fetch(`http://localhost:8080/home/singleFilm/${id}`)
     .then((res) => res.json())
     .then((data) => {
@@ -45,7 +62,10 @@ function ApiCall(props) {
       rate.innerHTML = `${data.rentalRate}`;
       cost.innerHTML = `${data.replacementCost}`;
     });
+ 
+    });
 }
+
 function OwnCardStructure() {
   return (
     <>
@@ -63,22 +83,33 @@ function OwnCardStructure() {
 }
 
 function OppCardStructure() {
-    return (
-      <>
-        <h6 id="oppfilmId"></h6>
-        <h3 id="opptitle"></h3>
-        <h4 id="oppdescription"></h4>
-        <h4 id="opprating"></h4>
-        <h4 id="oppintRating"></h4>
-        <h4 id="opprelease"></h4>
-        <h4 id="opplength"></h4>
-        <h4 id="opprate"></h4>
-        <h4 id="oppcost"></h4>
-      </>
-    );
-  }
+  return (
+    <>
+      <h6 id="oppfilmId"></h6>
+      <h3 id="opptitle"></h3>
+      <h4 id="oppdescription"></h4>
+      <h4 id="opprating"></h4>
+      <h4 id="oppintRating"></h4>
+      <h4 id="opprelease"></h4>
+      <h4 id="opplength"></h4>
+      <h4 id="opprate"></h4>
+      <h4 id="oppcost"></h4>
+    </>
+  );
+}
 
-  function OppApiCall(props) {
+function GenerateOppCard() {
+    let maxNumber = 0;
+    fetch(`http://localhost:8080/home/filmCount`)
+      .then((res) => res.text())
+      .then((data) => {
+        maxNumber = data;
+       let randomId = Math.random();
+    randomId = randomId * maxNumber;
+    randomId++;
+    randomId = Math.floor(randomId);
+    console.log(randomId);
+    
     let filmId = document.getElementById("oppfilmId");
     let title = document.getElementById("opptitle");
     let description = document.getElementById("oppdescription");
@@ -89,7 +120,8 @@ function OppCardStructure() {
     let rate = document.getElementById("opprate");
     let cost = document.getElementById("oppcost");
   
-    let id = props.id;
+    let id = randomId;
+    
     fetch(`http://localhost:8080/home/singleFilm/${id}`)
       .then((res) => res.json())
       .then((data) => {
@@ -104,17 +136,8 @@ function OppCardStructure() {
         rate.innerHTML = `${data.rentalRate}`;
         cost.innerHTML = `${data.replacementCost}`;
       });
+   
+      });
+  
+   
   }
-
-  function generateOwnCard(){
-    
-    
-    let maxNumber = fetch(`http://localhost:8080/home/filmCount`).then((res) => res.text())
-    console.log("Maxnumber is: " + maxNumber)
-
-let randomId = Math.floor((Math.ranadom() * maxNumber)+1)
-
-<ApiCall id=randomId/>
-
-
-}
