@@ -26,16 +26,30 @@ h1{
 }
 
 
-#gameDiv
 #ownCardDiv {
     display: float;
     width: 50%;
-
+float: left;
     background-color: lightblue;
+   height: 400px;
 }
 
 #oppCardDiv{
     display: float;
     width: 50%;
+    float: right;
     background-color: rgb(176, 117, 117);
+    height:400px;
+}
+.disabled{
+    display:none;
+}
+
+#bannerImg{
+    display:inline;
+    padding-top: 5px;
+}
+#bannerText{
+    display:inline;
+  padding-bottom: 10px;
 }
