@@ -1,17 +1,38 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import GamePage from './pages/GamePage';
+import HowTo from './pages/HowTo';
+import AddFilm from './pages/AddFilm';
+import Layout from './pages/Layout';
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+
+
+
+
+function BannerHeader() {
+  return (
+    <div id="bannerDiv">
+      <h1>Flop Trumps</h1>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+            <Route index element={<GamePage/>}/>
+          <Route path="GamePage" element={<GamePage />} />
+          <Route path="HowTo" element={<HowTo />} />
+          <Route path="AddFilm" element={<AddFilm />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+}
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
