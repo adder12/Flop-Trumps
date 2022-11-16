@@ -31,7 +31,7 @@ h1{
     width: 50%;
 float: left;
     background-color: lightblue;
-   height: 400px;
+   height: 600px;
 }
 
 #oppCardDiv{
@@ -39,7 +39,7 @@ float: left;
     width: 50%;
     float: right;
     background-color: rgb(176, 117, 117);
-    height:400px;
+    height:600px;
 }
 .disabled{
     display:none;

@@ -1,12 +1,17 @@
-import { React, useState } from "react";
+import { React, useState, setState } from "react";
 import ReactDOM from "react";
 
 function GamePage() {
-  const points = useState(0);
+ const [points] = useState('');
+//setState({points :  0});
+function addPoint(){
+ points++;
+}
   return (
     <>
       <div class="SiteDiv">
         <h2>Lets play a game</h2>
+        <h3>Points: {points}</h3>
         <div id="gameDiv">
           <div id="ownCardDiv">
             <OwnCardStructure />
@@ -18,7 +23,7 @@ function GamePage() {
           </div>
        
         </div> 
-          <GameButtons/>
+          <GameButtons />
       </div>
     </>
   );
@@ -28,7 +33,7 @@ export default GamePage;
 
 function GenerateOwnCard() {
   let maxNumber = 0;
-  fetch(`http://localhost:8080/home/filmCount`)
+  fetch(`https://fake-films-top-trumps-1668596784853.azurewebsites.net/home/filmCount`)
     .then((res) => res.text())
     .then((data) => {
       maxNumber = data;
@@ -50,7 +55,7 @@ function GenerateOwnCard() {
 
       let id = randomId;
 
-      fetch(`http://localhost:8080/home/singleFilm/${id}`)
+      fetch(`https://fake-films-top-trumps-1668596784853.azurewebsites.net/home/singleFilm/${id}`)
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
@@ -71,19 +76,65 @@ function OwnCardStructure() {
   return (
     <>
       <h6 id="filmId"></h6>
-      <h3 id="title"></h3>
-      <h4 id="description"></h4>
-      <h4 id="rating"></h4>
-      <h4 id="intRating"></h4>
-      <h4 id="release"></h4>
-      <h4 id="length"></h4>
-      <h4 id="rate"></h4>
-      <h4 id="cost"></h4>
+      <h4 id="intRating" class="disabled"></h4>
+      <table>
+        <tr>
+          <td>Title: </td>
+          <td>
+          <h3 id="title"></h3>
+          </td>
+        </tr>
+        <tr>
+          <td>Description: </td>
+          <td>
+          <h4 id="description"></h4>
+          </td>
+        </tr>
+      </table>
+      <table>
+        <tr>
+          <td>Rating: </td>
+          <td>
+            <h4 id="rating" ></h4>
+          </td>
+        
+        </tr>
+        <tr>
+          <td>Release Year: </td>
+          <td>
+            <h4 id="release"></h4>
+          </td>
+       
+        </tr>
+        <tr>
+          <td>Length: </td>
+          <td>
+          
+            <h4 id="length"></h4>
+          </td>
+       
+        </tr>
+        <tr>
+          <td>Rental Rate: </td>
+          <td>
+            <h4 id="rate"></h4>
+          </td>
+     
+        </tr>
+        <tr>
+          <td>Replacement Cost: </td>
+          <td>
+       
+            <h4 id="cost"></h4>
+          </td>
+          
+        </tr>
+      </table>
     </>
   );
 }
 
-function GameButtons() {
+function GameButtons(setPoints) {
   const handleClick = (type) => {
  console.log("test")
     let intRating = document.getElementById("intRating");
@@ -100,6 +151,7 @@ let result = 1;
     switch (type) {
       case "r":
         result = Comparison(intRating.innerHTML, oppIntRating.innerHTML);
+
         break;
       case "ry":
         result = Comparison(release.innerHTML, oppRelease.innerHTML);
@@ -117,17 +169,22 @@ let result = 1;
 
     console.log(result);
 
-if(result = 0){
+if(result == 0){
+  console.log("where")
     GenerateOwnCard();
-    GenerateOppCard();
-} else if(result=1){
+  
+} else if(result==1){
+  console.log("there")
     GenerateOppCard();
 }else{
+console.log("here");
 
+  GenerateOppCard();
 
 }
 
   };
+
 
   return (
     <div id="buttonDiv">
@@ -214,7 +271,7 @@ function OppCardStructure() {
 
 function GenerateOppCard() {
   let maxNumber = 0;
-  fetch(`http://localhost:8080/home/filmCount`)
+  fetch(`https://fake-films-top-trumps-1668596784853.azurewebsites.net/home/filmCount`)
     .then((res) => res.text())
     .then((data) => {
       maxNumber = data;
@@ -236,7 +293,7 @@ function GenerateOppCard() {
 
       let id = randomId;
 
-      fetch(`http://localhost:8080/home/singleFilm/${id}`)
+      fetch(`https://fake-films-top-trumps-1668596784853.azurewebsites.net/home/singleFilm/${id}`)
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
