@@ -8,7 +8,7 @@ return (
     <nav id="navdiv">
         <ul>
             <li>
-                <Link to="/GamePage">Home</Link>
+                <Link to="/GamePage">The Game</Link>
             </li>
             <li>
                 <Link to="/HowTo">How to Play</Link>

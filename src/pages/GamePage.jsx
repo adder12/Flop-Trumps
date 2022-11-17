@@ -1,17 +1,16 @@
-import { React, useState, setState } from "react";
+import { React, useState } from "react";
 import ReactDOM from "react";
 
 function GamePage() {
- const [points] = useState('');
-//setState({points :  0});
-function addPoint(){
- points++;
-}
+  const [points, setPoints] = useState(0);
+
   return (
     <>
       <div class="SiteDiv">
-        <h2>Lets play a game</h2>
-        <h3>Points: {points}</h3>
+        <div id="headerDiv">
+          <h2>Lets play a game</h2>
+          <h3>Points: {points}</h3>
+        </div>
         <div id="gameDiv">
           <div id="ownCardDiv">
             <OwnCardStructure />
@@ -21,9 +20,8 @@ function addPoint(){
             <OppCardStructure />
             <GenerateOppCard />
           </div>
-       
-        </div> 
-          <GameButtons />
+        </div>
+        <GameButtons setPoints={setPoints} />
       </div>
     </>
   );
@@ -33,7 +31,9 @@ export default GamePage;
 
 function GenerateOwnCard() {
   let maxNumber = 0;
-  fetch(`https://fake-films-top-trumps-1668596784853.azurewebsites.net/home/filmCount`)
+  fetch(
+    `https://fake-films-top-trumps-1668596784853.azurewebsites.net/home/filmCount`
+  )
     .then((res) => res.text())
     .then((data) => {
       maxNumber = data;
@@ -55,7 +55,9 @@ function GenerateOwnCard() {
 
       let id = randomId;
 
-      fetch(`https://fake-films-top-trumps-1668596784853.azurewebsites.net/home/singleFilm/${id}`)
+      fetch(
+        `https://fake-films-top-trumps-1668596784853.azurewebsites.net/home/singleFilm/${id}`
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
@@ -75,19 +77,22 @@ function GenerateOwnCard() {
 function OwnCardStructure() {
   return (
     <>
-      <h6 id="filmId"></h6>
-      <h4 id="intRating" class="disabled"></h4>
+      <div id="image" />
+      <h6 id="filmId">*</h6>
+      <h4 id="intRating" class="disabled">
+        *
+      </h4>
       <table>
         <tr>
           <td>Title: </td>
           <td>
-          <h3 id="title"></h3>
+            <h3 id="title">*</h3>
           </td>
         </tr>
         <tr>
           <td>Description: </td>
           <td>
-          <h4 id="description"></h4>
+            <h4 id="description">*</h4>
           </td>
         </tr>
       </table>
@@ -95,59 +100,52 @@ function OwnCardStructure() {
         <tr>
           <td>Rating: </td>
           <td>
-            <h4 id="rating" ></h4>
+            <h4 id="rating">*</h4>
           </td>
-        
         </tr>
         <tr>
           <td>Release Year: </td>
           <td>
-            <h4 id="release"></h4>
+            <h4 id="release">*</h4>
           </td>
-       
         </tr>
         <tr>
           <td>Length: </td>
           <td>
-          
-            <h4 id="length"></h4>
+            <h4 id="length">*</h4>
           </td>
-       
         </tr>
         <tr>
           <td>Rental Rate: </td>
           <td>
-            <h4 id="rate"></h4>
+            <h4 id="rate">*</h4>
           </td>
-     
         </tr>
         <tr>
           <td>Replacement Cost: </td>
           <td>
-       
-            <h4 id="cost"></h4>
+            <h4 id="cost">*</h4>
           </td>
-          
         </tr>
       </table>
     </>
   );
 }
 
-function GameButtons(setPoints) {
+function GameButtons({ setPoints }) {
   const handleClick = (type) => {
- console.log("test")
+    console.log("test");
     let intRating = document.getElementById("intRating");
     let release = document.getElementById("release");
     let length = document.getElementById("length");
     let rate = document.getElementById("rate");
     let cost = document.getElementById("cost");
     let oppIntRating = document.getElementById("oppintRating");
-      let oppRelease = document.getElementById("opprelease");
-      let oppLength = document.getElementById("opplength");
-      let oppRate = document.getElementById("opprate");
-      let oppCost = document.getElementById("oppcost");
-let result = 1;
+    let oppRelease = document.getElementById("opprelease");
+    let oppLength = document.getElementById("opplength");
+    let oppRate = document.getElementById("opprate");
+    let oppCost = document.getElementById("oppcost");
+    let result = 1;
     switch (type) {
       case "r":
         result = Comparison(intRating.innerHTML, oppIntRating.innerHTML);
@@ -169,38 +167,40 @@ let result = 1;
 
     console.log(result);
 
-if(result == 0){
-  console.log("where")
-    GenerateOwnCard();
-  
-} else if(result==1){
-  console.log("there")
-    GenerateOppCard();
-}else{
-console.log("here");
+    if (result === 0) {
+      console.log("where");
+      GenerateOwnCard();
+      return;
+    } else if (result === 1) {
+      console.log("there");
+      GenerateOppCard();
+      return;
+    } else {
+      console.log("here");
+      setPoints(+1);
 
-  GenerateOppCard();
+      ReplaceOwnCard();
+      GenerateOppCard();
+      console.log("hello");
 
-}
-
+      return;
+    }
   };
-
-
   return (
     <div id="buttonDiv">
-      <button class="gameButtons" onClick={() =>handleClick("r")}>
+      <button class="gameButtons" onClick={() => handleClick("r")}>
         Rating
       </button>
-      <button class="gameButtons" onClick={() =>handleClick("ry")}>
+      <button class="gameButtons" onClick={() => handleClick("ry")}>
         Release Year
       </button>
-      <button class="gameButtons" onClick={() =>handleClick("l")}>
+      <button class="gameButtons" onClick={() => handleClick("l")}>
         Length
       </button>
-      <button class="gameButtons" onClick={() =>handleClick("rr")}>
+      <button class="gameButtons" onClick={() => handleClick("rr")}>
         Rental Rate
       </button>
-      <button class="gameButtons" onClick={() =>handleClick("rc")}>
+      <button class="gameButtons" onClick={() => handleClick("rc")}>
         Replacement cost
       </button>
     </div>
@@ -210,19 +210,22 @@ console.log("here");
 function OppCardStructure() {
   return (
     <>
-      <h6 id="oppfilmId"></h6>
-      <h4 id="oppintRating" class="disabled"></h4>
+      <div id="image" />
+      <h6 id="oppfilmId">*</h6>
+      <h4 id="oppintRating" class="disabled">
+        *
+      </h4>
       <table>
         <tr>
           <td>Title: </td>
           <td>
-            <h3 id="opptitle"></h3>
+            <h3 id="opptitle">*</h3>
           </td>
         </tr>
         <tr>
           <td>Description: </td>
           <td>
-            <h4 id="oppdescription"></h4>
+            <h4 id="oppdescription">*</h4>
           </td>
         </tr>
       </table>
@@ -230,14 +233,18 @@ function OppCardStructure() {
         <tr>
           <td>Rating: </td>
           <td>
-            <h4 id="opprating" class="disabled"></h4>
+            <h4 id="opprating" class="disabled">
+              *
+            </h4>
           </td>
           <td class="Enabled">?????</td>
         </tr>
         <tr>
           <td>Release Year: </td>
           <td>
-            <h4 id="opprelease" class="disabled"></h4>
+            <h4 id="opprelease" class="disabled">
+              *
+            </h4>
           </td>
           <td class="Enabled">?????</td>
         </tr>
@@ -245,14 +252,18 @@ function OppCardStructure() {
           <td>Length: </td>
           <td>
             {" "}
-            <h4 id="opplength" class="disabled"></h4>
+            <h4 id="opplength" class="disabled">
+              *
+            </h4>
           </td>
           <td class="Enabled">?????</td>
         </tr>
         <tr>
           <td>Rental Rate: </td>
           <td>
-            <h4 id="opprate" class="disabled"></h4>
+            <h4 id="opprate" class="disabled">
+              *
+            </h4>
           </td>
           <td class="Enabled">?????</td>
         </tr>
@@ -260,7 +271,9 @@ function OppCardStructure() {
           <td>Replacement Cost: </td>
           <td>
             {" "}
-            <h4 id="oppcost" class="disabled"></h4>
+            <h4 id="oppcost" class="disabled">
+              *
+            </h4>
           </td>
           <td class="Enabled">?????</td>
         </tr>
@@ -271,7 +284,9 @@ function OppCardStructure() {
 
 function GenerateOppCard() {
   let maxNumber = 0;
-  fetch(`https://fake-films-top-trumps-1668596784853.azurewebsites.net/home/filmCount`)
+  fetch(
+    `https://fake-films-top-trumps-1668596784853.azurewebsites.net/home/filmCount`
+  )
     .then((res) => res.text())
     .then((data) => {
       maxNumber = data;
@@ -293,7 +308,9 @@ function GenerateOppCard() {
 
       let id = randomId;
 
-      fetch(`https://fake-films-top-trumps-1668596784853.azurewebsites.net/home/singleFilm/${id}`)
+      fetch(
+        `https://fake-films-top-trumps-1668596784853.azurewebsites.net/home/singleFilm/${id}`
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
@@ -311,14 +328,44 @@ function GenerateOppCard() {
 }
 
 function Comparison(val1, val2) {
-    console.log( "val1" + val1);
-    console.log("val2" + val2);
-    if( val1 < val2){
-        return 0;
-    } else if(val1 == val2){
-        return 1;
-    } else{
-        return 2;
-    }
+  console.log("val1" + val1);
+  console.log("val2" + val2);
+  if (val1 < val2) {
+    return 0;
+  } else if (val1 == val2) {
+    return 1;
+  } else {
+    return 2;
+  }
+}
 
+function ReplaceOwnCard() {
+  let filmId = document.getElementById("filmId");
+  let title = document.getElementById("title");
+  let description = document.getElementById("description");
+  let rating = document.getElementById("rating");
+  let intRating = document.getElementById("intRating");
+  let release = document.getElementById("release");
+  let length = document.getElementById("length");
+  let rate = document.getElementById("rate");
+  let cost = document.getElementById("cost");
+  let oppFilmId = document.getElementById("oppfilmId");
+  let oppTitle = document.getElementById("opptitle");
+  let oppDescription = document.getElementById("oppdescription");
+  let oppRating = document.getElementById("opprating");
+  let oppIntRating = document.getElementById("oppintRating");
+  let oppRelease = document.getElementById("opprelease");
+  let oppLength = document.getElementById("opplength");
+  let oppRate = document.getElementById("opprate");
+  let oppCost = document.getElementById("oppcost");
+
+  filmId.innerHTML = oppFilmId.innerHTML;
+  title.innerHTML = oppTitle.innerHTML;
+  description.innerHTML = oppDescription.innerHTML;
+  rating.innerHTML = oppRating.innerHTML;
+  intRating.innerHTML = oppIntRating.innerHTML;
+  release.innerHTML = oppRelease.innerHTML;
+  length.innerHTML = oppLength.innerHTML;
+  rate.innerHTML = oppRate.innerHTML;
+  cost.innerHTML = oppCost.innerHTML;
 }

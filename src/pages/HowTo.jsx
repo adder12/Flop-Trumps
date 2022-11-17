@@ -13,8 +13,21 @@ function HowTo(){
 Top Trumps is a card game played with a deck of cards, based around a given subject<br/>
 be it, trains, dog breeds, or very obscure subjects.</h4>
 <br/>
- <h4>Each card in the deck represents a single item in the subject group and has seperate</h4>
- 
+ <h4>Each card in the deck represents a single item in the subject group and has seperate numerical stats assigned to<br/>
+ various properties of that item</h4>
+
+ <img src="Dreamliner.png"/>
+
+ <h4>In standard top trumps all players split the deck between themselves. <br/> the core gameplay loop is that on a players turn they take a card from their deck, choose one of their categories that they think their card<br/>
+has the highest stat in. All the stats are revealed and the person with the highest, takes all the cards. Gameplay then repeats. If a player runs out of cards, they are out of the game. </h4>
+<h4>The winner is declared when one person ends up with the whole deck, although this gets considerably harder when only two people remain</h4> 
+
+
+<tr></tr>
+
+
+<h4>Our implementation of Flop Trumps has several differences from the original, as a single player experience, you will be playing for points against "the computer". Cards randomly generated in place of a deck being divided.<br/>
+The core gameplay loop is the exact same as the original</h4>
   </div>  </div></>
     )
     }
