@@ -7,7 +7,7 @@ import GamePage from './pages/GamePage';
 import HowTo from './pages/HowTo';
 import AddFilm from './pages/AddFilm';
 import Layout from './pages/Layout';
-
+import NoPage from './pages/NoPage';
 
 
 
@@ -29,6 +29,8 @@ export default function App() {
           <Route path="GamePage" element={<GamePage />} />
           <Route path="HowTo" element={<HowTo />} />
           <Route path="AddFilm" element={<AddFilm />} />
+          <Route path="*" element={<NoPage />}/>
+
         </Route>
       </Routes>
     </BrowserRouter>

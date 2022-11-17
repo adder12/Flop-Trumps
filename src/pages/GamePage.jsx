@@ -3,7 +3,6 @@ import ReactDOM from "react";
 
 function GamePage() {
   const [points, setPoints] = useState(0);
-
   return (
     <>
       <div class="SiteDiv">
@@ -27,7 +26,7 @@ function GamePage() {
   );
 }
 
-export default GamePage;
+
 
 function GenerateOwnCard() {
   let maxNumber = 0;
@@ -282,7 +281,7 @@ function OppCardStructure() {
   );
 }
 
-function GenerateOppCard() {
+function GenerateOppCard() {  //function to randomly generate an opponents card
   let maxNumber = 0;
   fetch(
     `https://fake-films-top-trumps-1668596784853.azurewebsites.net/home/filmCount`
@@ -290,9 +289,8 @@ function GenerateOppCard() {
     .then((res) => res.text())
     .then((data) => {
       maxNumber = data;
-      let randomId = Math.random();
-      randomId = randomId * maxNumber;
-      randomId++;
+      let randomId = Math.floor((Math.random()* maxNumber)+1);
+     
       randomId = Math.floor(randomId);
       console.log(randomId);
 
@@ -305,7 +303,6 @@ function GenerateOppCard() {
       let length = document.getElementById("opplength");
       let rate = document.getElementById("opprate");
       let cost = document.getElementById("oppcost");
-
       let id = randomId;
 
       fetch(
@@ -327,7 +324,7 @@ function GenerateOppCard() {
     });
 }
 
-function Comparison(val1, val2) {
+function Comparison(val1, val2) { //Function to perform card comparison
   console.log("val1" + val1);
   console.log("val2" + val2);
   if (val1 < val2) {
@@ -339,7 +336,7 @@ function Comparison(val1, val2) {
   }
 }
 
-function ReplaceOwnCard() {
+function ReplaceOwnCard() { //function to replace the users card with the opponents card
   let filmId = document.getElementById("filmId");
   let title = document.getElementById("title");
   let description = document.getElementById("description");
@@ -369,3 +366,5 @@ function ReplaceOwnCard() {
   rate.innerHTML = oppRate.innerHTML;
   cost.innerHTML = oppCost.innerHTML;
 }
+
+export default GamePage;
