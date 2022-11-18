@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="H:\TSI Training work\HTML\React\sakila-frontend\src\tests\Banner.test.js">
+    <testCase name="The banner renders correctly Text test" duration="110"/>
+    <testCase name="true is truthy and false is falsy true is truthy" duration="2"/>
+    <testCase name="true is truthy and false is falsy false is falsy" duration="2"/>
+  </file>
+</testExecutions>
