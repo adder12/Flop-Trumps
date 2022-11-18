@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
   <file path="H:\TSI Training work\HTML\React\sakila-frontend\src\tests\Banner.test.js">
-    <testCase name="The banner renders correctly Text test" duration="110"/>
+    <testCase name="The banner renders correctly Text test" duration="53"/>
     <testCase name="true is truthy and false is falsy true is truthy" duration="2"/>
-    <testCase name="true is truthy and false is falsy false is falsy" duration="2"/>
+    <testCase name="true is truthy and false is falsy false is falsy" duration="1"/>
+  </file>
+  <file path="H:\TSI Training work\HTML\React\sakila-frontend\src\tests\NoPage.test.js">
+    <testCase name="true is truthy and false is falsy true is truthy" duration="7"/>
+    <testCase name="true is truthy and false is falsy false is falsy" duration="1"/>
+    <testCase name="The text renders correctly Text test" duration="48"/>
   </file>
 </testExecutions>
