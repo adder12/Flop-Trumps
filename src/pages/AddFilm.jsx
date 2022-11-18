@@ -1,5 +1,4 @@
 import {React, useState} from 'react'
-import ReactDOM from 'react-dom'
 
 
 function Site(){
@@ -7,8 +6,7 @@ return(
 <>
 <AddFilm/>
     <tr/>
-
-<UpdateActor/>
+{/* <UpdateActor/> */}
 </>
 )
 }

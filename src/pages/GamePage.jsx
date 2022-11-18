@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import ReactDOM from "react";
+
 
 function GamePage() {
   const [points, setPoints] = useState(0);
